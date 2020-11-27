@@ -3,16 +3,16 @@ const { handleUserLogin, handleUserSignup, handleUserData } = require("../contro
 const { decodeJWT } = require("../utils/jwt.utils")
 const userRouter = Router();
 const authCheck = (req, response, next) => decodeJWT(req.headers["x-access-token"]).then(() => {
-	if (user) {
-		next()
-	}
-	response.status(401).json({
-		message: "unAuthenticated user"
-	})
+  if (user) {
+    next()
+  }
+  response.status(401).json({
+    message: "unAuthenticated user"
+  })
 }).catch(() => {
-	response.status(400).json({
-		message: "unAuthenticated/bad request"
-	})
+  response.status(400).json({
+    message: "unAuthenticated/bad request"
+  })
 })
 
 userRouter.post("/signup", handleUserSignup)
